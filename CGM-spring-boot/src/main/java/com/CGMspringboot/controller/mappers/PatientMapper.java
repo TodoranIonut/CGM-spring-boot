@@ -6,6 +6,10 @@ import com.CGMspringboot.domain.entity.Doctor;
 import com.CGMspringboot.domain.entity.Patient;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Component
 public class PatientMapper {
 
@@ -53,5 +57,18 @@ public class PatientMapper {
         patient.setDoctor(doctor);
 
         return patient;
+    }
+
+    public List<PatientResponseDTO> toPatientResponseDTOList(List<Patient> patientList) {
+        if (patientList.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<PatientResponseDTO> patientResponseDTOList = new ArrayList<>();
+        for (Patient patient : patientList) {
+            patientResponseDTOList.add(toPatientResponseDTO(patient));
+        }
+
+        return patientResponseDTOList;
     }
 }

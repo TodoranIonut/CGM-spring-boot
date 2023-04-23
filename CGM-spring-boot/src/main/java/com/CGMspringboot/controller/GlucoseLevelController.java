@@ -10,6 +10,7 @@ import com.CGMspringboot.exceptions.date.InvalidDateFormatException;
 import com.CGMspringboot.service.glucoseLevel.GlucoseLevelService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,6 +29,7 @@ public class GlucoseLevelController {
     private final GlucoseLevelMapper glucoseLevelMapper;
 
     @PostMapping("/save")
+    @PreAuthorize("hasAnyRole('ADMIN','DOCTOR','PATIENT')")
     public ResponseEntity<GlucoseLevelResponseDTO> saveGlucoseLevel(@RequestBody GlucoseLevelRequestDTO glucoseLevelRequestDTO) throws UserIdNotFoundException {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/glucose/save").toUriString());
         GlucoseLevel glucoseLevel = glucoseLevelMapper.toGlucoseLevel(glucoseLevelRequestDTO);
@@ -37,6 +39,7 @@ public class GlucoseLevelController {
     }
 
     @GetMapping("/byDate/patient/id/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DOCTOR','PATIENT')")
     public ResponseEntity<List<GlucoseLevelResponseDTO>> getDailyGlucoseLevel(@PathVariable Integer id, @RequestParam String dateFormat, @RequestParam  String date) throws CGMApplicationException {
         SimpleDateFormat simpleDateFormat = null;
         Date formatedDate = null;

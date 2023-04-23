@@ -7,6 +7,8 @@ import com.CGMspringboot.exceptions.appUser.UserEmailNotFoundException;
 import com.CGMspringboot.exceptions.appUser.UserIdNotFoundException;
 import com.CGMspringboot.exceptions.appUser.UserPhoneNumberConflictException;
 
+import java.util.List;
+
 public interface PatientService {
 
     Patient findPatientById(Integer patientId) throws UserIdNotFoundException;
@@ -16,6 +18,8 @@ public interface PatientService {
     Patient registerNewPatient(Patient patient) throws CGMApplicationException;
 
     Patient updatePatient(Integer patientId, Patient patient) throws CGMApplicationException;
+
+    List<Patient> findPatientsByDoctor(Integer doctorId);
 
     void deletePatientById(Integer patientId);
 
