@@ -13,7 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "doctor")
-public class Doctor extends UserInfo{
+public class Doctor extends AppUser{
 
     private String clinic;
 }

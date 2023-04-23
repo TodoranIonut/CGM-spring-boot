@@ -7,5 +7,5 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "admins")
-public class Admin extends UserInfo {
+public class Admin extends AppUser {
 }
