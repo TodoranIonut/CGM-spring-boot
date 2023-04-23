@@ -6,13 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "app_user")
-public class AppUser {
+@MappedSuperclass
+public abstract class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +24,4 @@ public class AppUser {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @OneToOne(fetch = FetchType.LAZY,optional = false,cascade = CascadeType.ALL)
-    @JoinColumn(name = "app_user_id")
-    private UserInfo userInfo;
 }
